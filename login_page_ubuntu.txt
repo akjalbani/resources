@@ -1,0 +1,25 @@
+# A step by step guide to create a login.php and installation of required packages on ubuntu.
+# Here are the steps to create a login page in PHP with backend database to verify passwords and host it on Ubuntu:
+1. Set up a web server on Ubuntu:
+    - update ubuntu : sudo apt update
+    - Install Apache, PHP, and MySQL using the following command: sudo apt-get install apache2 php mysql-server libapache2-mod-php
+    - Start the Apache service using the command: sudo systemctl start apache2
+    - Enable the Apache service to start automatically on boot using the command: sudo systemctl enable apache2
+    
+2. Create a database for the login page:
+    - Log in to the MySQL command-line interface using the command: mysql -u root -p
+    - Create a database for the login page using the following SQL statement: CREATE DATABASE login_db;
+    - Create a table for the users using the following SQL statement:
+      CREATE TABLE users (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(30) NOT NULL,
+        password VARCHAR(255) NOT NULL
+      );
+
+    - Insert test data into the table using the following SQL statement:
+      INSERT INTO users (username, password)
+      VALUES ('user1', 'password1'),
+       ('user2', 'password2');
+3. Create the login page:
+
+
