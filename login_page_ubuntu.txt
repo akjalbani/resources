@@ -20,6 +20,7 @@
       INSERT INTO users (username, password)
       VALUES ('user1', 'password1'),
        ('user2', 'password2');
-3. Create the login page:
+3. Create the login page, login.html, login.php, if login successful redirect to home.html page.
+
 
 
