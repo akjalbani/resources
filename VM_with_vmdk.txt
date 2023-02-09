@@ -1,0 +1,18 @@
+Ref: https://kb.vmware.com/s/article/2010196
+
+To create the Workstation virtual machine using existing .vmdk file(s):
+
+In Workstation, go to File > New > Virtual Machine.
+Select Custom and click Next.
+Select the hardware compatibility you require and click Next.
+In the Guest Operating System Installation selection screen, select I will install the Operating System later and click Next.
+Select the guest operating system that is installed, including the version.
+Click Next.
+Provide a file name and choose the location where you want to save the virtual machine.
+Click Next.
+If necessary, adjust the number of processors and number of cores per processor required by the virtual machine and then click Next.
+Adjust the amount of memory to be allocated to your virtual machine and click Next.
+Select the desired networking type for your virtual machine and click Next.
+Select Use an Existing Virtual Disk and click Next.
+Click Browse and navigate to the location of your existing .vmdk file.
+Select the .vmdk file and click Next.
