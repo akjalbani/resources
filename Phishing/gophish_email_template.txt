@@ -6,7 +6,7 @@ We hope this email finds you well. Our security team has recently detected some 
 
 To verify your account information, please follow the secure link below:
 
-{{.Link}}
+{{.URL}}
 
 If you have any concerns or questions, please don't hesitate to reach out to our security team. We are committed to providing you with the highest level of security and support.
 
