@@ -1,0 +1,2 @@
+After capturing data, redirect to this educational page:
+http://phish-education.apwg.org/r/
