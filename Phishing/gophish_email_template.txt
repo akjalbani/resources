@@ -1,0 +1,18 @@
+Subject: Action Required: Verify Your {{.Company}} Account Information
+
+Dear {{.FirstName}},
+
+We hope this email finds you well. Our security team has recently detected some unusual activity in your {{.Company}} account, and we are taking extra precautions to ensure the safety of your personal and financial information.
+
+To verify your account information, please follow the secure link below:
+
+{{.Link}}
+
+If you have any concerns or questions, please don't hesitate to reach out to our security team. We are committed to providing you with the highest level of security and support.
+
+Best regards,
+
+{{.SenderName}}
+{{.Company}} Security Team
+
+Note: This fake email is solely for phishing awareness training and should not be used for any malicious purposes. The recipient should be informed that this is a fake email and that they should not follow the link or provide any personal or financial information.
