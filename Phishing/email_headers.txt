@@ -1,0 +1,18 @@
+DKIM, SPF, and DMARC are email authentication mechanisms used to combat email spoofing, phishing, and other forms of email-based abuse.
+
+DKIM (DomainKeys Identified Mail) is a method of email authentication that allows an organization to take responsibility for a 
+message it sends. DKIM provides a way for the sender's domain to cryptographically sign an email message so that the recipient can verify that 
+it was indeed sent by the authorized sender and that the message was not tampered with in transit.
+
+SPF (Sender Policy Framework) is an email authentication mechanism that allows the domain owner to specify which mail servers are 
+authorized to send email from that domain. When a receiving mail server receives an email message, it can check the SPF record of 
+the sender's domain to see if the message came from an authorized server. If the message did not come from an authorized server, 
+the receiving server can reject it or mark it as suspicious.
+
+DMARC (Domain-based Message Authentication, Reporting, and Conformance) is a protocol that builds on DKIM and SPF to provide a 
+way for email receivers to determine whether an email message is legitimate. DMARC enables domain owners to specify how they 
+want email receivers to handle email messages that fail authentication checks. Domain owners can instruct receivers to quarantine or 
+reject messages that fail authentication checks or to deliver them to the recipient's spam folder.
+
+In summary, DKIM, SPF, and DMARC work together to provide a way for email senders to authenticate their messages and for email 
+receivers to verify that the message came from a legitimate source.
