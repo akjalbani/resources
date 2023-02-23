@@ -1,0 +1,11 @@
+# fixes for vmware workstation pro on windows 11
+# Host windows 11
+
+Origional post :
+https://communities.vmware.com/t5/VMware-Workstation-Pro/Windows-11-host-support/m-p/2876484#M172253
+To solve Memory Integrity problem run following command as an administrator
+bcdedit /set hypervisorlaunchtype off
+
+Youtube video
+https://youtu.be/JRNVB_fryUw
+
