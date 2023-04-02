@@ -1,0 +1,88 @@
+step-by-step tutorial for setting up CloudWatch Logs and AWS Lambda to forward logs from an EC2 instance to Splunk:
+
+Prerequisites:
+
+An AWS account with access to the AWS Management Console
+A Splunk instance with a valid HTTP Event Collector (HEC) token
+Step 1: Configure CloudWatch Logs to collect logs from your EC2 instance
+
+Open the AWS Management Console and navigate to the CloudWatch service.
+
+Click on "Log groups" in the left-hand menu, then click "Create log group".
+
+Enter a name for the log group and click "Create".
+
+Click on the name of the log group you just created, then click "Actions" and select "Create log stream".
+
+Enter a name for the log stream and click "Create".
+
+Repeat steps 4-5 for each log stream you want to collect logs from on your EC2 instance.
+
+On your EC2 instance, install and configure the CloudWatch Logs agent according to the instructions in the AWS documentation.
+When prompted to enter the log group and log stream names, enter the names you created in steps 3-5.
+
+Step 2: Set up an AWS Lambda function to forward logs to Splunk
+
+Open the AWS Management Console and navigate to the Lambda service.
+
+Click on "Create function".
+
+Select "Author from scratch", enter a name for the function, and select the "Python 3.x" runtime.
+
+Expand the "Choose or create an execution role" section and select "Create a new role with basic Lambda permissions".
+
+Click "Create function".
+
+In the function code editor, copy and paste the following Python code:
+
+import os
+import json
+import urllib3
+
+http = urllib3.PoolManager()
+
+def lambda_handler(event, context):
+    for log_event in event['awslogs']['data']:
+        log_data = json.loads(log_event)
+        headers = {
+            'Authorization': 'Splunk <YOUR_HEC_TOKEN>',
+            'Content-Type': 'application/json'
+        }
+        data = {
+            'event': log_data['logEvents'][0]['message']
+        }
+        url = 'https://<YOUR_SPLUNK_INSTANCE>:8088/services/collector/event'
+        encoded_data = json.dumps(data).encode('utf-8')
+        resp = http.request('POST', url, body=encoded_data, headers=headers)
+
+Replace <YOUR_HEC_TOKEN> with your Splunk HEC token and <YOUR_SPLUNK_INSTANCE> with the hostname or IP address of your Splunk instance.
+
+Scroll down to the "Environment variables" section and add the following key-value pairs:
+Key	            Value
+AWS_REGION	The AWS region where your EC2 instance is located
+SPLUNK_HOST	The hostname or IP address of your Splunk instance
+SPLUNK_PORT	The port number for the Splunk HEC endpoint (usually 8088)
+
+Scroll down to the "Basic settings" section and increase the timeout value to at least 1 minute (since the 
+function may need to process a large number of logs).
+
+Click "Save".
+
+Step 3: Configure CloudWatch Logs to forward logs to the Lambda function
+Click on the name of the log group you created in Step 1.
+Click on the name of the log stream you created in Step 1.
+Click "Actions" and select "Stream to AWS Lambda".
+Select the Lambda function you created in Step 2 and click "Next".
+In the "Configure log format" section, select "Other".
+Enter {"format":"json"} in the "Subscription filter pattern" field.
+Click "Next", review the settings, and click "Start streaming".
+That's it! Now logs from your EC2 instance will be forwarded to CloudWatch Logs, 
+which will then forward them to your Lambda function, which will then forward them to your Splunk instance using the HEC.
+
+To verify that logs are being forwarded correctly, you can search for them in Splunk by running a search query like this:
+sourcetype=<YOUR_SOURCETYPE> <YOUR_SEARCH_TERM>
+
+Replace <YOUR_SOURCETYPE> with the name of the sourcetype you configured in the HEC data input, and 
+<YOUR_SEARCH_TERM> with a search term that should appear in your logs.
+If logs are being forwarded correctly, you should see search results in Splunk.
+
